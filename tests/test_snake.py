@@ -18,33 +18,33 @@ also see: Uncle Bob "Clean Code Lectures"
 # feature: the snake is moving in all 4 directions
 # TODO: also test random positions
 
-from spiced_snake import move
+from turtle import position
+from spiced_snake import move, VALID_DIRECTIONS
 import pytest
+import random
 
-def test_move_left():
-    position = (5, 5) # x, y
-    new_position = move(position, 'left')
-    assert new_position == (4, 5)
+@pytest.mark.parametrize('position,direction,expected', [
+    # data examples
+    ((5, 5), 'left', (4, 5)),
+    ((5, 5), 'right', (6, 5)),
+    ((5, 0), 'left', (4, 0)),
+    ((5, 5), 'up', (5, 6)),
+    ((5, 5), 'down', (5, 4)),
+    ((3, 3), 'left', (2, 3))
+    # ((0 , 5), 'left', (10, 5)) only if 
+])
+def test_move(position, direction,expected):
+    """The snake is moving in all 4 directions"""
+    assert move(position, direction) == expected
 
-def test_move_left_smwelse():
-    position = (5, 0) # x, y
-    new_position = move(position, 'left')
-    assert new_position == (4, 0)
+# def test_move_left():
+#     position = (5, 5) # x, y
+#     new_position = move(position, 'left')
+#     assert new_position == (4, 5)
 
-def test_move_left():
-    position = (5, 5) # x, y
-    new_position = move(position, 'right')
-    assert new_position == (6, 5)
-
-def test_move_up():
-    position = (5, 5) # x, y
-    new_position = move(position, 'up')
-    assert new_position == (5, 6)
-
-def test_move_down():
-    position = (5, 5) # x, y
-    new_position = move(position, 'down')
-    assert new_position == (5, 4)
+def test_move_invalid_direction():
+    with pytest.raises(Exception):
+        move((1, 1), 'dummy')
 
 def test_move_fraction():
     """This is an examople of a code that's not supposed to work"""
@@ -52,3 +52,12 @@ def test_move_fraction():
     with pytest.raises(Exception):
         move(position, 'down')
 
+def test_move_random():
+    """test random position"""
+    for _ in range(100):
+        x = random.randint(1, 10)
+        y = random.randint(1, 10)
+        direction = random.choice(list(VALID_DIRECTIONS))
+        position = x, y
+        move(position, direction)
+        

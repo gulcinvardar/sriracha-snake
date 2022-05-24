@@ -19,7 +19,7 @@ also see: Uncle Bob "Clean Code Lectures"
 # TODO: also test random positions
 
 from turtle import position
-from spiced_snake import move, VALID_DIRECTIONS
+import spicy_snake.moves
 import pytest
 import random
 
@@ -35,7 +35,7 @@ import random
 ])
 def test_move(position, direction,expected):
     """The snake is moving in all 4 directions"""
-    assert move(position, direction) == expected
+    assert spicy_snake.moves.move(position, direction) == expected
 
 # def test_move_left():
 #     position = (5, 5) # x, y
@@ -44,20 +44,20 @@ def test_move(position, direction,expected):
 
 def test_move_invalid_direction():
     with pytest.raises(Exception):
-        move((1, 1), 'dummy')
+        spicy_snake.moves.move((1, 1), 'dummy')
 
 def test_move_fraction():
     """This is an examople of a code that's not supposed to work"""
     position = (3.14519, 5) # x, y
     with pytest.raises(Exception):
-        move(position, 'down')
+        spicy_snake.moves.move(position, 'down')
 
 def test_move_random():
     """test random position"""
     for _ in range(100):
         x = random.randint(1, 10)
         y = random.randint(1, 10)
-        direction = random.choice(list(VALID_DIRECTIONS))
+        direction = random.choice(list(spicy_snake.moves.VALID_DIRECTIONS))
         position = x, y
-        move(position, direction)
+        spicy_snake.moves.move(position, direction)
         

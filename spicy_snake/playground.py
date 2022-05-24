@@ -1,5 +1,4 @@
 import random
-from turtle import position
 
 class Playground:
     """Manages the plaground"""
@@ -24,13 +23,14 @@ class Playground:
 
 
     def add_food(self, position):
-        if self.is_obstacle(position):
+        if not self.is_obstacle(position):
           self.food = position
         else:
             self.food = None
 
     def add_random_food(self):
-        x = random.randint(1, self.xsize -1)
-        y = random.randint(1, self.ysize -1)
-        if not self.is_obstacle(position):
-            self.add_food(position)
+        position = (
+            random.randint(1, self.xsize - 1),
+            random.randint(1, self.ysize - 1)
+        )
+        self.add_food(position)

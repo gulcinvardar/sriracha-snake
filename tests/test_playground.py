@@ -15,8 +15,8 @@ import random
 
 def test_create():
     """Creating a Playground object that works"""
-    p = Playground(10,10)
-    assert p.size ==(10,10)
+    p = Playground(10, 11)
+    assert p.size ==(10, 11)
 
 def test_is_obstacle():
     p = Playground(5, 6)
@@ -29,16 +29,20 @@ def test_is_obstacle():
 def test_add_food():
     """Food should be inside the Playground"""
     p = Playground(5, 6)
-    p.add_food((0.0))
-    assert p.food is None
+    p.add_food((3, 3))
+    assert p.food == (3, 3)
 
+def test_add_food_boundary():
+    """Food cannot be added on obstacles"""
+    p = Playground(5, 6)
+    p.add_food((0, 0))
+    assert p.food is None
 
 def test_add_food_boundary_sequence():
     """Food should be inside the Playground"""
     p = Playground(5, 6)
-    p.add_food((3.3))
+    p.add_food((3, 3))
     assert p.food is not None
-
     p.add_food((0, 0))
     assert p.food is None
 
@@ -51,8 +55,8 @@ def test_random_food():
 
 def test_random_food_mock():
     p = Playground(5, 6)
-    nm = MagicMock(return_value=4)
-    random.randint = nm
+    mm = MagicMock(return_value=4)
+    random.randint = mm
     p.add_random_food()
-    assert p.food ==(4, 4)
-    assert nm.call_count == 2
+    assert p.food == (4, 4)
+    assert mm.call_count == 2

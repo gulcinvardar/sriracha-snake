@@ -27,11 +27,10 @@ def draw(player_position, pg, win, screen):
     win.refresh()
     screen.refresh()
 
-
 win, screen = prepare_screen()
 
 def move_player(player_position, direction):
-    dx, dy = direction
+    dx,dy=direction
     x, y = player_position
     x += dx
     y += dy
@@ -50,8 +49,6 @@ def game_loop(screen):
         if direction:
             player_position = move_player(player_position, direction)
             draw(player_position, pg, win, screen)
-            
-            
 
 if __name__ == "__main__":
 

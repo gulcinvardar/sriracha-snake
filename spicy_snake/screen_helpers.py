@@ -1,6 +1,11 @@
+"""
+Helper functions for managing the terminal display.
+"""
+
 import curses
 
 def prepare_screen():
+    """Initialize the screen"""
     screen = curses.initscr()
     curses.start_color()
     curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)

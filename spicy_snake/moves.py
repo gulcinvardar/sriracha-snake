@@ -1,5 +1,5 @@
 
-VALID_DIRECTIONS = {'left', 'up', 'down', 'right'} # this is a python set. similar to dict
+VALID_DIRECTIONS = {'left', 'up', 'right', 'down'} # this is a python set. similar to dict
 
 def move(current_position: tuple, direction: str) -> tuple:
     #defensive code: validity check

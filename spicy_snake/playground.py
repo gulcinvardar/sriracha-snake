@@ -1,7 +1,6 @@
 import random
 
 class Playground:
-    """Manages the plaground"""
 
     def __init__(self, xsize, ysize):
         self.xsize = xsize
@@ -25,7 +24,7 @@ class Playground:
     def add_food(self, position):
         if not self.is_obstacle(position):
           self.food = position
-        else:
+        else: 
             self.food = None
 
     def add_random_food(self):

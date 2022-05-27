@@ -91,17 +91,20 @@ def test_tail_collision():
     
     # make the snake super long
     for _ in range(10):
-        s.grow()
-        s.forward()
+        s.grow() #self.growing -= 1 solves the forward growing problem
+        
 
     # these are harmless
     for d in ['right', 'up', 'left']:
         s.set_direction(d)
+        s.grow()
         s.forward()
         assert s.check_collision(p) is False
+    assert len(s.tail) == 4
         
 
     # now comes the move where the snake hits itself
     s.set_direction('down')
+    s.grow()
     s.forward()
     assert s.check_collision(p) is True

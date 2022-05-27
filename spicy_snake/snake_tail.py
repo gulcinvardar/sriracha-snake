@@ -1,5 +1,5 @@
 from turtle import position
-from spicy_snake.moves import move, VALID_DIRECTIONS
+from spicy_snake.moves import move
 from spicy_snake.playground import Playground
 
 
@@ -23,7 +23,8 @@ class Snake:
         self.tail.append(self.head)
         if self.growing == 0:
             self.tail.remove(self.tail[0])
-        self.growing = self.growing - 1
+        else: 
+            self.growing -= 1
 
 
     def set_direction(self, direction):
@@ -34,11 +35,16 @@ class Snake:
     def eat(self, playground):
         """Eats food at the position of the head, if any"""
         if self.head == playground.food:
-            playground.add_random_food()
+            playground.food = None
             self.grow()
 
 
     def check_collision(self, playground):
         """Returns True if the head hits an obstacle or the tail"""
-        return playground.is_obstacle(position=self.head)
+        if playground.is_obstacle(position=self.head):
+            return True
+        else:
+            return self.head in self.tail[:-1]
+
+
          
